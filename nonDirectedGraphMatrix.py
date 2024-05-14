@@ -37,7 +37,7 @@ class NonDirectedMatriceGraph:
     def showVertexNeighbourhood(self, vertex):
         aux = []
         for i in range(len(self.matrix)):
-            if (self.matrix[vertex][i] == 1):
+            if (self.matrix[vertex][i] >= 1):
                 aux.append(i)
         print(f"Vizinhaças do vértice {vertex}: {aux}")
     

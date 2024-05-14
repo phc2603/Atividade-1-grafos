@@ -40,7 +40,7 @@ class NonDirectedGraphList:
         for i in range(self.graph[vertex].length):
             aux.append(self.graph[vertex].get(i).value)
         
-        print(f"Vizinhaças do vértice {vertex}: {aux}")
+        print(f"Vizinhaças do vértice {vertex}: {list(set(aux))}")
 
     def vertexDegree(self, vertex):
         print(f"Grau do vértice {vertex}: {self.graph[vertex].length}")

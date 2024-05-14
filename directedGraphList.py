@@ -42,7 +42,6 @@ class DirectedGraphList:
             for j in range(self.graph[i].length):
                 if (self.graph[i].get(j).value == vertex):
                     predecessors.append(i)
-                    break
         return predecessors
 
     def vertexDegree(self, vertex):
@@ -63,10 +62,11 @@ class DirectedGraphList:
         return True 
     
     def isRegularGraph(self):
-        for i in range(len(self.graph)):
-            if  (len(self.checkPredecessor(i)) != (len(self.checkSuccessor(i)))):
+        basePredecessors = len(self.checkPredecessor(0))
+        baseSucessors = len(self.checkSuccessor(0))
+        for i in range(1, len(self.graph)):
+            if  ((len(self.checkPredecessor(i)) != basePredecessors) or (len(self.checkSuccessor(i)) != baseSucessors)):
                 return False
-    
         return True
 
     def isCompleteGraph(self):
@@ -173,8 +173,8 @@ while (choice != -1):
                 if (vertex >= graphSize or vertex < 0):
                     print("Vértice inválido")
                 else:
-                    print(f"Antecessores: {graph.checkPredecessor(vertex)}")
-                    print(f"Sucessores: {graph.checkSuccessor(vertex)}")
+                    print(f"Predecessores: {list(set(graph.checkPredecessor(vertex)))}")
+                    print(f"Sucessores: {list(set(graph.checkSuccessor(vertex)))}")
             case 4:
                 vertex = int(input("Digite o número do vértice que deseja identificar o grau: "))
                 if (vertex >= graphSize or vertex < 0):

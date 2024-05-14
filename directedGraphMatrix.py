@@ -31,15 +31,15 @@ class DirectedMatriceGraph:
     def checkSuccessors(self, vertex):
         aux = []
         for i in range(len(self.matrix)):
-            if (self.matrix[vertex][i] != 0):
-                aux.append(self.matrix[vertex][i])
+            if (self.matrix[vertex][i] >= 1):
+                aux.append(i)
         return aux
     
     def checkPredecessors(self, vertex):
         aux = []
         for i in range(len(self.matrix)):
-            if (self.matrix[i][vertex] != 0):
-                aux.append(self.matrix[i][vertex])
+            if (self.matrix[i][vertex] >= 1):
+                aux.append(i)
         return aux
     
     def vertexDegree(self, vertex):
@@ -54,9 +54,10 @@ class DirectedMatriceGraph:
         return True        
 
     def isRegularGraph(self):
-        firstVertexDegree = self.vertexDegree(0)
+        basePredecessor = len(self.checkPredecessors(0))
+        baseSucessor = len(self.checkSuccessors(0))
         for i in range(1, len(self.matrix)):
-            if (self.vertexDegree(i) != firstVertexDegree):
+            if ((len(self.checkPredecessors(i)) != basePredecessor) or (len(self.checkSuccessors(i) != baseSucessor))):
                 return False
         return True
 
@@ -87,7 +88,7 @@ class DirectedMatriceGraph:
             for j in range(len(vertexNeighbor)):
                 vertex = vertexNeighbor[j]
                 if (self.__colors[i] == self.__colors[vertex]):
-                    print(f"CORES DE {i}: {self.__colors[i]} // de {vertex}: {self.__colors[vertex]}")
+                    print(f"CORES DE {i}: {self.__colors[i]} | de {vertex}: {self.__colors[vertex]}")
                     return False
         return True
 
@@ -171,8 +172,8 @@ while (choice != -1):
                 if (vertex >= graphSize or vertex < 0):
                     print("Vértice inválido")
                 else:
-                    graph.checkPredecessors(vertex)
-                    graph.checkSuccessors(vertex)
+                    print(f"Predecessores: {list(set(graph.checkPredecessors(vertex)))}")
+                    print(f"Sucessores: {list(set(graph.checkSuccessors(vertex)))}")
             case 4:
                 vertex = int(input("Digite o número do vértice que deseja identificar o grau: "))
                 if (vertex >= graphSize or vertex < 0):
