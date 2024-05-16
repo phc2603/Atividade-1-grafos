@@ -15,7 +15,7 @@ class Prim:
                 if visited[i]: #seta o vértice atual para verificar as arestas adj
                     for j in range(graph[i].length): #itera na lista adj
                         adjacentVertex = graph[i].get(j).value
-                        if (not visited[adjacentVertex]):#se o vertice adj ao vertice atual não estiver visitado
+                        if (not visited[adjacentVertex]):#se o vertice adj ao vertice atual não estiver visitado (isso corta a possibilidade de criar ciclos)
                             if (min > weigthEdges[i][adjacentVertex]):#se o valor do peso vértice adj for menor que o peso da aresta 
                                 min = weigthEdges[i][adjacentVertex] #peso do vértice adjacente é o valor da aresta
                                 sourceVertex = i #vértice de origem/atual
@@ -46,6 +46,9 @@ class Prim:
         self.showMST()
     
     def showMST(self):
+        totalWeigth = 0
         print("ARESTA - PESO")
         for source, adjacent, weigth in self.__matrixMST:
+            totalWeigth += weigth
             print(f"{source} -> {adjacent}: {weigth}")
+        print(f"Peso total: {totalWeigth}")

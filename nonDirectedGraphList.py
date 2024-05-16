@@ -154,7 +154,7 @@ while (choice != -1):
                 firstV = int(input("Digite o primeiro vértice que deseja criar a aresta: "))
                 secondV = int(input("Digite o segundo vértice para montar a aresta: "))
                 weigth = int(input("Digite o peso da aresta: "))
-                if (firstV >= graphSize or secondV > graphSize or firstV < 0 or secondV >= graphSize):
+                if (firstV >= graphSize or secondV > graphSize or firstV < 0 or secondV < 0 or secondV >= graphSize):
                     print("Vértice inválido")
                 else:
                     graph.insertEdge(firstV, secondV, weigth)
@@ -204,7 +204,10 @@ while (choice != -1):
             case 11:
                 graph.depthFirstSearch()
             case 12:
-                graph.MST()
+                if (graph.isConnected()):
+                    graph.MST()
+                else:
+                    print("Grafo nao é conexo")
             case 13:
                 result = graph.isConnected()
                 if (result):

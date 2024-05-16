@@ -206,7 +206,10 @@ while (choice != -1):
             case 11:
                 graph.depthFirstSearch()
             case 12:
-                graph.MST()
+                if (graph.isConnected()):
+                    graph.MST()
+                else:
+                    print("Grafo não é conexo")
             case 13:
                 result = graph.isConnected()
                 if (result):
